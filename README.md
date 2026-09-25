@@ -13,18 +13,24 @@ npm install
 
 The local `.env` file contains the UI and API base URLs. It is ignored by Git; use `.env.example` as a reference when setting up the project.
 
-## Running tests
+## Running Tests
 
-Run the UI tests:
+Run the complete test suite:
 
 ```bash
 npx playwright test --project=chromium
 ```
 
+Run the UI tests only:
+
+```bash
+npx playwright test --project=chromium tests/ui
+```
+
 Run the API tests only:
 
 ```bash
-npx playwright test --project=chromium tests/api/users/users.spec.ts --no-deps
+npx playwright test --project=chromium tests/api --no-deps
 ```
 
 The authentication setup runs automatically before the authenticated UI tests and creates the local storage state used by the products and checkout tests.
