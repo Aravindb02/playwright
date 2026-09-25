@@ -7,6 +7,7 @@ export class CheckoutPage {
   private readonly continueButton;
   private readonly finishButton;
   private readonly confirmationMessage;
+  private readonly overviewHeading;
 
   constructor(private readonly page: Page) {
     this.firstNameInput = page.getByTestId('firstName');
@@ -15,6 +16,7 @@ export class CheckoutPage {
     this.continueButton = page.getByRole('button', { name: /continue/i });
     this.finishButton = page.getByRole('button', { name: /finish/i });
     this.confirmationMessage = page.getByText('Thank you for your order!', { exact: true });
+    this.overviewHeading = page.getByText('Checkout: Overview', { exact: true });
   }
 
   async fillCheckoutInformation(firstName: string, lastName: string, postalCode: string) {
@@ -29,6 +31,10 @@ export class CheckoutPage {
 
   async finishOrder() {
     await this.finishButton.click();
+  }
+
+  async expectOverviewDisplayed() {
+    await expect(this.overviewHeading).toBeVisible();
   }
 
   async expectOrderConfirmation() {

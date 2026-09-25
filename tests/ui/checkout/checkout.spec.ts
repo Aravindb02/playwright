@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { CartPage } from '../../../pages/cart/cart.page';
 import { CheckoutPage } from '../../../pages/checkout/checkout.page';
 import { ProductsPage } from '../../../pages/products/products.page';
@@ -20,7 +20,7 @@ test.describe('Checkout UI', () => {
 
     await checkoutPage.fillCheckoutInformation('Aravind', 'Test', '576101');
     await checkoutPage.continueToOverview();
-    await expect(page.getByText('Checkout: Overview', { exact: true })).toBeVisible();
+    await checkoutPage.expectOverviewDisplayed();
     await checkoutPage.finishOrder();
     await checkoutPage.expectOrderConfirmation();
   });
