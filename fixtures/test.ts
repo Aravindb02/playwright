@@ -1,4 +1,5 @@
 import { test as base } from '@playwright/test';
+import { UsersClient } from '../clients/reqres/users.client';
 import { CartPage } from '../pages/cart/cart.page';
 import { CheckoutPage } from '../pages/checkout/checkout.page';
 import { LoginPage } from '../pages/login/login.page';
@@ -9,6 +10,7 @@ type Fixtures = {
   productsPage: ProductsPage;
   cartPage: CartPage;
   checkoutPage: CheckoutPage;
+  usersClient: UsersClient;
 };
 
 export const test = base.extend<Fixtures>({
@@ -23,6 +25,9 @@ export const test = base.extend<Fixtures>({
   },
   checkoutPage: async ({ page }, use) => {
     await use(new CheckoutPage(page));
+  },
+  usersClient: async ({ request }, use) => {
+    await use(new UsersClient(request));
   },
 });
 
