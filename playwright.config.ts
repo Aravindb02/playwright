@@ -28,6 +28,7 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: environment.uiBaseUrl,
+    testIdAttribute: 'data-test',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -37,6 +38,7 @@ export default defineConfig({
   projects: [
     {
       name: 'setup',
+      testDir: './setup',
       testMatch: /auth\.setup\.ts/,
       use: {
         ...devices['Desktop Chrome'],
@@ -45,6 +47,7 @@ export default defineConfig({
     },
     {
       name: 'chromium',
+      dependencies: ['setup'],
       use: {
         ...devices['Desktop Chrome'],
         baseURL: environment.uiBaseUrl,
