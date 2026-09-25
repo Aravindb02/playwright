@@ -1,15 +1,9 @@
-import { test } from '@playwright/test';
-import { CartPage } from '../../../pages/cart/cart.page';
-import { CheckoutPage } from '../../../pages/checkout/checkout.page';
-import { ProductsPage } from '../../../pages/products/products.page';
+import { test } from '../../../fixtures/test';
 
 test.describe('Checkout UI', () => {
   test.use({ storageState: 'storage/standardUser.json' });
 
-  test('standard user can complete checkout', async ({ page }) => {
-    const productsPage = new ProductsPage(page);
-    const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+  test('standard user can complete checkout', async ({ productsPage, cartPage, checkoutPage }) => {
     const expectedProducts = ['Sauce Labs Backpack', 'Sauce Labs Bike Light'];
 
     await productsPage.goto();
